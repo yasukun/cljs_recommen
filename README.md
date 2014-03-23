@@ -1,12 +1,12 @@
 cljs_recommen
 =============
 
-A Leiningen 2.0 template for ClojureScript development.
+A Leiningen 2.0 template for ClojureScript.
 
 ## Usage
 
 ```bash
-lein instal
+lein install
 cd foo
 lein new cljs-recommen hoge
 tree hoge
