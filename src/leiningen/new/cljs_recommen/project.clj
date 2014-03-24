@@ -1,5 +1,4 @@
 (defproject {{sanitized}} "0.1.0-SNAPSHOT"
-  :source-paths ["src/clj" "src/cljs"]
   :description "FIXME: write this!"
   :url "http://example.com/FIXME"
   :uberjar-name "{{sanitized}}-standalone.jar"
@@ -18,12 +17,12 @@
                  [jayq "2.5.0"]
                  [ring "1.2.1"]]
   :plugins [[lein-cljsbuild "1.0.2"]
+            [com.cemerick/austin "0.1.3"]
             [lein-ring "0.8.10"]]
   :hooks [leiningen.cljsbuild]
-  :profiles {:dev {:repl-options {:init-ns {{sanitized}}.core}
-                   :plugins [[com.cemerick/austin "0.1.3"]
-                             [lein-cljsbuild "1.0.2"]]
-                   :cljsbuild {:builds [{:source-paths ["src/cljs"]
-                                         :compiler {:output-to "public/js/app.js"
-                                                    :optimizations :simple
-                                                    :pretty-print true}}]}}})
+  :source-paths ["src/clj"]
+  :cljsbuild {:builds [{:source-paths ["src/cljs"]
+                        :compiler {:output-to "public/js/app.js"
+                                   :optimizations :simple
+                                   :pretty-print true}
+                        :jar true}]})
