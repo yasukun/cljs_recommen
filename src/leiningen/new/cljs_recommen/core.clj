@@ -1,7 +1,8 @@
 (ns {{name}}.core
   (use [clojure.tools.cli :only [cli]]
        [org.httpkit.server :only [run-server]]
-       [{{name}}.routes])
+       [{{name}}.routes]
+       [{{name}}.config :only [app-configs cfg]])
   (:require [compojure.route :refer (resources)]
             [compojure.core :refer (GET defroutes)]
             [ring.util.response :as response])
@@ -9,10 +10,10 @@
 
 (defonce server (atom nil))
 
+(defn- to-int [s] (Integer/parseInt s))
+
 (defn stop-server []
   (when-not (nil? @server)
-    ;; graceful shutdown: wait 100ms for existing requests to be finished
-    ;; :timeout is optional, when no timeout, stop immediately
     (@server :timeout 100)
     (reset! server nil)))
 
@@ -20,10 +21,14 @@
   ([] (run 3000))
   ([port]
      (reset! server (run-server (app) {:port port}))
-     (println (str "sever running@localhos:" port))))
+     (println (str "sever running@localhost:" port))))
 
 (defn -main [& args]
-  ;; The #' is useful, when you want to hot-reload code
-  ;; You may want to take a look: https://github.com/clojure/tools.namespace
-  ;; and http://http-kit.org/migration.html#reload
-  (reset! server (run-server (app) {:port 3000})))
+  (let [[options _ banner]
+        (cli args
+             ["-p" "--port" "Port to listen" :default 3000 :parse-fn to-int]
+             ["--[no-]help" "Print this help"])]
+    (when (:help options) (println banner) (System/exit 0))
+    (swap! app-configs merge options)
+    (reset! server (run-server (app) {:port (cfg :port)}))
+    (println (str "sever running@localhost:" (cfg :port)))))

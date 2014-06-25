@@ -13,10 +13,12 @@
              ["project.clj" (render "project.clj" data)]
              ["src/clj/{{sanitized}}/handlers/app.clj" (render "handlers/app.clj" data)]
              ["src/clj/{{sanitized}}/handlers/api.clj" (render "handlers/api.clj" data)]
-             ["src/clj/{{sanitized}}/routes.clj" (render "routes.clj" data)]             
+             ["src/clj/{{sanitized}}/routes.clj" (render "routes.clj" data)]
              ["src/clj/{{sanitized}}/core.clj" (render "core.clj" data)]
-             ["src/cljs/{{sanitized}}/core.cljs" (render "core.cljs" data)]             
-             ["public/css/page.css" (render "public/css/page.css")]
-             "public/js/"
-             "public/imgs/"
+             ["src/clj/{{sanitized}}/config.clj" (render "config.clj" data)]
+             ["src/clj/{{sanitized}}/middleware.clj" (render "middleware.clj" data)]
+             ["src/cljs/{{sanitized}}/core.cljs" (render "core.cljs" data)]
+             ["resources/public/css/page.css" (render "resources/public/css/page.css")]
+             "resources/public/js/"
+             "resources/public/imgs/"
              )))
