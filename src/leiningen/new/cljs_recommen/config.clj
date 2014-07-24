@@ -1,4 +1,4 @@
-(ns {{name}} .config)
+(ns {{name}}.config)
 
 (defonce app-configs (atom {:profile :dev}))
 

@@ -1,6 +1,5 @@
 (ns {{name}}.middleware
   (:use [compojure.core :only [GET POST DELETE PUT]]
-        [clojure.tools.logging :only [debug error info]]
         [clojure.data.json :only [write-str]]))
 
 (defn json-response [resp]

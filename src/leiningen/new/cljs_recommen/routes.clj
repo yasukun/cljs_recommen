@@ -4,7 +4,9 @@
           (ring.middleware [keyword-params :only
                             [wrap-keyword-params]]
                            [params :only [wrap-params]]
-                           [session :only [wrap-session]]))
+                           [session :only [wrap-session]]
+                           [jsonp :only [wrap-json-with-padding]])
+          [{{name}} .middleware :only [JGET]])
     (:require
      [cemerick.austin.repls :refer (browser-connected-repl-js)]
      [net.cgrand.enlive-html :as enlive]
@@ -26,7 +28,7 @@
            (GET "/time" [] api/get-time))
   ;; static files under ./public folder, prefix /static
   ;; like /static/css/style.css
-  (route/files "/static")
+  (route/resources "/static")
   ;; 404, modify for a better 404 page
   (route/not-found "<p>Page not found.</p>" ))
 
@@ -34,4 +36,3 @@
                  wrap-session
                  wrap-keyword-params
                  wrap-params))
-
